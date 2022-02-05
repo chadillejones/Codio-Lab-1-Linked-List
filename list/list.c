@@ -26,7 +26,7 @@ void list_free(list_t *l) {}
 
 void list_print(list_t *l) {
     node_t * current = l->head;
-
+    printf("Current List is:\n");
     while (current != NULL) {
         printf("%d\n", current->value);
         current = current->next;
@@ -111,11 +111,15 @@ elem list_remove_from_front(list_t *l) {
 elem list_remove_at_index(list_t *l, int index) { 
     int i = 0;
     int retval = -1;
-    list_t * current =  l->head;
-    list_t * temp_node = NULL;
+    
+    if (l->head == NULL) {
+        return -1;
+    }
+    node_t * current =  l->head;
+    node_t * temp_node = NULL;
 
     if (index == 0) {
-        return pop(head);
+        return list_remove_from_back(l);
     }
 
     for (i = 0; i < index-1; i++) {
